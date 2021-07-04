@@ -1,0 +1,37 @@
+name: DataBases tasks checking
+
+on: 'push'
+
+env:
+  POSTGRES_HOST: "localhost"
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "postgres"
+  POSTGRES_PORT: "5432"
+
+jobs:
+  postgres:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PostgreSQL and upload dump
+        uses: n1ru4l/psql-action@v1
+        with:
+          POSTGRES_HOST: "localhost"
+          POSTGRES_USER: "postgres"
+          POSTGRES_PASSWORD: "postgres"
+          POSTGRES_PORT: "5432"
+          DATABASE_DUMP_PATH: "dump.sql"
+
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Test with pytest
+        run: |
+          pytest
