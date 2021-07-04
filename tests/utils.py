@@ -2,13 +2,13 @@ import os
 
 import psycopg2
 
-POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
-POSTGRES_USER = os.environ.get('POSTGRES_USER')
-POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
-POSTGRES_PORT = os.environ.get('POSTGRES_PORT')
+POSTGRES_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
+POSTGRES_USER = os.environ.get('POSTGRES_USER', 'postgres')
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'postgres')
+POSTGRES_PORT = os.environ.get('POSTGRES_PORT', 5432)
 POSTGRES_DB = 'postgres'
 
-TASKS_DIR = os.path.abspath('../tasks')
+TASKS_DIR = os.path.abspath('tasks')
 
 
 def get_db_connect():

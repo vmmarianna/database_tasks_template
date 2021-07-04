@@ -1,5 +1,5 @@
 import os
-from tests.utils import get_db_cursor, TASKS_DIR
+from utils import get_db_cursor, TASKS_DIR
 
 SQL_FILE = 'example.sql'
 
@@ -11,7 +11,7 @@ def test_simple_select():
         print(f'{SQL_FILE} not found!')
         exit(1)
 
-    query = f.readlines()
+    query = ''.join(f.readlines())
 
     if not query:
         print(f'No query in file {SQL_FILE}')
@@ -23,4 +23,3 @@ def test_simple_select():
     results = [i for i in cur.fetchall()]
 
     assert len(results) == 3
-    assert 'Andy' in results

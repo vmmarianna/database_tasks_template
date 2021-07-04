@@ -4,5 +4,5 @@ CREATE TABLE "foo" (
 );
 
 INSERT INTO "foo" ("name") VALUES
-  ("peter"), ("jesus"), ("andy")
+  ('peter'), ('jesus'), ('andy')
 ;
