@@ -1,7 +1,7 @@
 import os
+from tests.utils import get_db_cursor, TASKS_DIR
 
 SQL_FILE = 'example.sql'
-from utils import get_db_cursor, TASKS_DIR
 
 
 def test_simple_select():
@@ -23,3 +23,4 @@ def test_simple_select():
     results = [i for i in cur.fetchall()]
 
     assert len(results) == 3
+    assert 'Andy' in results
