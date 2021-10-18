@@ -4,6 +4,8 @@ import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
+BENCHMARK_JSON_PATH = 'benchmark_queries.json'
+
 POSTGRES_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
 POSTGRES_USER = os.environ.get('POSTGRES_USER', 'postgres')
 POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', 'postgres')
@@ -43,10 +45,9 @@ def get_benchmark_query(task_number: int) -> str:
 
 def __load_query_from_json(task_number: int) -> str:
     try:
-        benchmark_query_path = os.path.join(os.path.abspath('.'), 'benchmark_queries.json')
-        f = open(benchmark_query_path)
+        f = open(BENCHMARK_JSON_PATH)
     except FileNotFoundError:
-        print(f'Benchmark json not found! {benchmark_query_path}')
+        print(f'Benchmark json not found! {BENCHMARK_JSON_PATH}')
         exit(1)
     else:
         query = json.load(f).get(str(task_number))
