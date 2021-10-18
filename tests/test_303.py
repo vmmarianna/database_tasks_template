@@ -25,4 +25,4 @@ def test_simple_select():
     benchmark_results = [i for i in cur.fetchall()]
     print('Benchmark Results: ', results)
 
-    assert results == benchmark_results
+    assert sorted(results) == sorted(benchmark_results)
