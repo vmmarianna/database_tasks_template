@@ -2,6 +2,7 @@ import json
 import os
 
 import psycopg2
+from psycopg2.extras import RealDictCursor
 
 POSTGRES_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
 POSTGRES_USER = os.environ.get('POSTGRES_USER', 'postgres')
@@ -20,7 +21,9 @@ def get_db_connect():
         password=POSTGRES_PASSWORD)
 
 
-def get_db_cursor():
+def get_db_cursor(return_as: str = ''):
+    if return_as == 'dict':
+        return get_db_connect().cursor(cursor_factory=RealDictCursor)
     return get_db_connect().cursor()
 
 
@@ -40,9 +43,10 @@ def get_benchmark_query(task_number: int) -> str:
 
 def __load_query_from_json(task_number: int) -> str:
     try:
-        f = open(os.path.join(os.path.abspath('.'), 'benchmark_queries.json'))
+        benchmark_query_path = os.path.join(os.path.abspath('.'), 'benchmark_queries.json')
+        f = open(benchmark_query_path)
     except FileNotFoundError:
-        print('Benchmark json not found!')
+        print(f'Benchmark json not found! {benchmark_query_path}')
         exit(1)
     else:
         query = json.load(f).get(str(task_number))

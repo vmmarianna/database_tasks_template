@@ -13,16 +13,16 @@ def test_simple_select():
         print(f'No query in file {SQL_FILE}')
         exit(1)
 
-    cur = get_db_cursor()
+    cur = get_db_cursor('dict')
     cur.execute(query)
 
     results = [i for i in cur.fetchall()]
     print('User Results: ', results)
 
-    cur = get_db_cursor()
+    cur = get_db_cursor('dict')
     cur.execute(benchmark_query)
 
     benchmark_results = [i for i in cur.fetchall()]
     print('Benchmark Results: ', results)
 
-    assert sorted(results) == sorted(benchmark_results)
+    assert results == benchmark_results
