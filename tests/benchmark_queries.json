@@ -1,0 +1,7 @@
+{
+  "303": "select p.name_point\nfrom points p join points_routes pr on p.cod_point = pr.cod_point join routes r\non pr.cod_route = r.cod_route where r.name_route = 'Вологда-Череповец'\norder by p.distance",
+  "310": "select cod_trip, name_route, hour, minute from trips t JOIN  routes r ON t.cod_route=r.cod_route\nwhere week_day=7 and hour<12\nORDER BY hour, minute",
+  "321": "select Count (*) as c from points\nwhere distance<=20",
+  "322": "select Count (*) as c from points\nwhere name_point Like'Ч%'",
+  "336": "select max(trips.hour),max(trips.minute) from trips\nwhere trips.hour = (select max(trips.hour) from trips)"
+}

@@ -1,17 +1,15 @@
-import os
-from utils import get_db_cursor, TASKS_DIR
+import json
 
-SQL_FILE = 'task_303.sql'
+from utils import get_db_cursor, get_query_from_file, get_benchmark_query
+
+TASK_NUMBER = 303
+SQL_FILE = f'task_{TASK_NUMBER}.sql'
 
 
 def test_simple_select():
-    try:
-        f = open(os.path.join(TASKS_DIR, SQL_FILE))
-    except FileNotFoundError:
-        print(f'{SQL_FILE} not found!')
-        exit(1)
 
-    query = ''.join(f.readlines())
+    query = get_query_from_file(SQL_FILE)
+    benchmark_query = get_benchmark_query(TASK_NUMBER)
 
     if not query:
         print(f'No query in file {SQL_FILE}')
@@ -21,5 +19,12 @@ def test_simple_select():
     cur.execute(query)
 
     results = [i for i in cur.fetchall()]
-    print(results)
-    assert results
+    print('User Results: ', results)
+
+    cur = get_db_cursor()
+    cur.execute(benchmark_query)
+
+    benchmark_results = [i for i in cur.fetchall()]
+    print('Benchmark Results: ', results)
+
+    assert results == benchmark_results
