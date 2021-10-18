@@ -4,7 +4,7 @@ import os
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-BENCHMARK_JSON_PATH = 'benchmark_queries.json'
+BENCHMARK_JSON_PATH = os.path.join(os.path.abspath('tests'), 'benchmark_queries.json')
 
 POSTGRES_HOST = os.environ.get('POSTGRES_HOST', 'localhost')
 POSTGRES_USER = os.environ.get('POSTGRES_USER', 'postgres')
