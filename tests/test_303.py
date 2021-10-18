@@ -4,6 +4,5 @@ TASK_NUMBER = 303
 SQL_FILE = f'task_{TASK_NUMBER}.sql'
 
 
-def test_simple_select():
-
+def test_task_303():
     simple_select_assert(SQL_FILE, TASK_NUMBER)
