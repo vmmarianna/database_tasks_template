@@ -40,7 +40,7 @@ def get_benchmark_query(task_number: int) -> str:
 
 def __load_query_from_json(task_number: int) -> str:
     try:
-        f = open(os.path.join(TASKS_DIR, 'benchmark_queries.json'))
+        f = open(os.path.join(os.path.abspath('.'), 'benchmark_queries.json'))
     except FileNotFoundError:
         print('Benchmark json not found!')
         exit(1)

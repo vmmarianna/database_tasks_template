@@ -1,5 +1,3 @@
-import json
-
 from utils import get_db_cursor, get_query_from_file, get_benchmark_query
 
 TASK_NUMBER = 303
