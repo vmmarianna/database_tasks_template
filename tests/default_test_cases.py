@@ -1,4 +1,4 @@
-from tests.utils import get_query_from_file, get_benchmark_query, get_db_cursor
+from utils import get_query_from_file, get_benchmark_query, get_db_cursor
 
 
 def simple_select_assert(sql_file: str, task_number: int):
