@@ -39,5 +39,4 @@ jobs:
       - name: Upload dump
         run: python3 upload_dump.py
       - name: Test with pytest
-        run: |
-          pytest -s
+        run: pytest -s
