@@ -1,1 +1,3 @@
-select name from foo;
+select name from foo2;
+
+
